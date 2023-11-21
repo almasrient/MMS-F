@@ -27,15 +27,24 @@ class AhliKariahResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('negara_id')
-                    ->required()
-                    ->numeric(),                
-                Forms\Components\TextInput::make('negeri_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('bandar_id')
-                    ->required()
-                    ->numeric(),                    
+                Forms\Components\Select::make('negara_id')
+                    ->label('Nama Negara')
+                    ->relationship(name: 'negara', titleAttribute: 'name')
+                    ->searchable()
+                    // ->preload()
+                    ->required(),              
+                Forms\Components\Select::make('negeri_id')
+                    ->label('Nama Negeri')
+                    ->relationship(name: 'negeri', titleAttribute: 'name')
+                    ->searchable()
+                    // ->preload()                
+                    ->required(),
+                Forms\Components\Select::make('bandar_id')
+                    ->label('Nama Bandar')
+                    ->relationship(name: 'bandar', titleAttribute: 'name')
+                    ->searchable()
+                    // ->preload()                     
+                    ->required(),                    
                 Forms\Components\TextInput::make('nama_penuh')
                     ->required()
                     ->maxLength(255),

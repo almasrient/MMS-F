@@ -27,15 +27,45 @@ class NegaraResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+                Forms\Components\TextInput::make('name')
+                    ->maxLength(255)
+                    ->required(),
+                Forms\Components\TextInput::make('code')
+                    ->required()
+                    ->numeric()
+                    ->maxLength(3),
+                Forms\Components\TextInput::make('phonecode')
+                    ->required()
+                    ->numeric()
+                    ->maxLength(5),            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('code')
+                    ->label('Abbr')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phonecode')
+                    ->label('Phonecode')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

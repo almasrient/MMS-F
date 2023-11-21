@@ -27,9 +27,12 @@ class BandarResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('negeri_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('negeri_id')
+                    ->label('Nama Negeri')
+                    ->relationship(name: 'negeri', titleAttribute: 'name')
+                    ->searchable()
+                    ->preload()                
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),

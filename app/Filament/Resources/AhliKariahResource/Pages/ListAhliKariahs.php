@@ -8,6 +8,8 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListAhliKariahs extends ListRecords
 {
+    protected static ?string $title = 'Ahli Kariah';
+
     protected static string $resource = AhliKariahResource::class;
 
     protected function getHeaderActions(): array

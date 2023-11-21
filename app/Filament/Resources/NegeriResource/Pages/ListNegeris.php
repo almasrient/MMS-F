@@ -8,6 +8,8 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListNegeris extends ListRecords
 {
+    protected static ?string $title = 'Negeri';
+
     protected static string $resource = NegeriResource::class;
 
     protected function getHeaderActions(): array
