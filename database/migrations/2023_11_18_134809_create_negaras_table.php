@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('negaras', function (Blueprint $table) {
             $table->id();
+            $table->char('code');
             $table->string('name');
+            $table->char('phonecode');
             $table->timestamps();
         });
     }
