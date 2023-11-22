@@ -9997,3 +9997,12 @@ vendor/ramsey/collection/src/Collection.php
 vendor/ramsey/collection/src/CollectionInterface.php
 vendor/ramsey/collection/src/DoubleEndedQueue.php
 vendor/ramsey/collection/src/DoubleEndedQueueInterface.php
+
+# */vendor/*
+# */examples/*
+# */docs/*
+# */docs2/*
+# */tests/*
+# */test/*
+# */Tests/*
+# */swiftmailer/swiftmailer/notes/*

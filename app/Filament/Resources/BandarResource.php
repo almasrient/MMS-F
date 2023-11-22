@@ -43,11 +43,18 @@ class BandarResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('negeri_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Cities Name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('negeri.name')
+                    ->label('States')
+                    ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('negeri.negara.name')
+                    ->label('Country')
+                    ->searchable()
+                    ->sortable(),                    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

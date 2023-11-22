@@ -12,12 +12,19 @@ class Bandar extends Model
     
     protected $fillable = [
         'negeri_id',
-        'name'
+        'name',
+        'code',
     ];
+
+
+    public function negara(): BelongsTo 
+    {
+        return $this->belongsTo(Negara::class);
+    }
 
     public function negeri(): BelongsTo 
     {
         return $this->belongsTo(Negeri::class);
-    }
+    }    
 
 }

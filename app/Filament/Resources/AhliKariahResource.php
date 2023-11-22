@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -45,11 +46,15 @@ class AhliKariahResource extends Resource
                     ->searchable()
                     // ->preload()                     
                     ->required(),                    
-                Forms\Components\TextInput::make('nama_penuh')
+                Forms\Components\TextInput::make('name_penuh')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('nric')
                     ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('no_tel')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tarikh_lahir')
                     ->required(),
@@ -70,7 +75,32 @@ class AhliKariahResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name_penuh')
+                    ->label('Nama Penuh')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('nric')
+                    ->label('NRIC')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('no_tel')
+                    ->formatStateUsing(function ($state, AhliKariah $ahlikariah) {
+                        return new HtmlString("&#9993; ".$ahlikariah->no_tel ."<br/> &#9742; ".$ahlikariah->email) ;  })
+                    ->label('Contact')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('alamat')
+                    ->label('Alamat')
+                    ->searchable()
+                    ->sortable(),                    
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
