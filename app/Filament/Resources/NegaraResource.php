@@ -20,7 +20,7 @@ class NegaraResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
     protected static ?string $navigationLabel = 'Negara';
     protected static ?string $modelLabel = 'Negara';
-    protected static ?string $navigationGroup = 'Ahli Kariah';
+    protected static ?string $navigationGroup = 'Geo Lokasi';
     protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form

@@ -23,7 +23,7 @@ class NegeriResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?string $navigationLabel = 'Negeri';
     protected static ?string $modelLabel = 'Negeri';     
-    protected static ?string $navigationGroup = 'Ahli Kariah';
+    protected static ?string $navigationGroup = 'Geo Lokasi';
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
