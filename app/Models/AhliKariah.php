@@ -10,6 +10,12 @@ class AhliKariah extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'ahli_kariah_id',
+        'ahli_kariah_nric',
+        'name_penjaga'
+    ];
+
     protected $guarded = [];
 
     public function negara(): BelongsTo 
