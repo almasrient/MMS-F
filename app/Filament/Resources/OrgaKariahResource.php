@@ -33,9 +33,9 @@ class OrgaKariahResource extends Resource
                 ->searchable()
                 // ->preload()
                 ->required(),                   
-            Forms\Components\Select::make('ahli_kariah_nric')
+            Forms\Components\Select::make('ahli_kariah_id')
             ->label('NRIC Petugas')
-            ->relationship(name: 'ahlikariah', titleAttribute: 'nric')
+            ->relationship(name: 'ahli_kariah', titleAttribute: 'nric')
             ->searchable()
             // ->preload()                     
             ->required(),                               
@@ -53,7 +53,26 @@ class OrgaKariahResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('kariah.name_kariah')
+                    ->label('Kariah')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('ahli_kariah.nric')
+                    ->label('NRIC Petugas')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('jawatan')
+                    ->label('Jawatan')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tarikh_lantikan')
+                    ->label('Tarikh Lantikan')
+                    ->sortable()
+                    ->searchable(),                    
+                Tables\Columns\TextColumn::make('tarikh_tamat')
+                    ->label('Tarikh Tamat')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

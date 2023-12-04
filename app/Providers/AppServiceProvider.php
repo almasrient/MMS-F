@@ -28,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
                 NavigationGroup::make()
                     ->label('Kariah'),                
                 NavigationGroup::make()
+                    ->label('Khairat')
+                    ->icon('heroicon-o-banknotes'),              
+                NavigationGroup::make()
                     ->label('Geo Lokasi')
                     ->collapsed(),
             ]);

@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -31,6 +32,19 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('S.P.K.B') //Sistem Pengurusan Kariah Bersepadu - CIMS
             ->sidebarCollapsibleOnDesktop()
             ->collapsibleNavigationGroups()
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Ahli Kariah'),                
+                NavigationGroup::make()
+                    ->label('Kariah'),                
+                NavigationGroup::make()
+                    ->label('Khairat')
+                    ->icon('heroicon-o-banknotes')
+                    ->collapsed(),              
+                NavigationGroup::make()
+                    ->label('Geo Lokasi')
+                    ->collapsed(),
+            ])            
             ->colors([
                 'primary' => Color::Amber,
             ])

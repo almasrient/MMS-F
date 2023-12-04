@@ -6,20 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OrgaKariah extends Model
+class Pencarum extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'ahli_kariah_id',
+        'caruman_id',
+        'tarikh_pembayaran',
+        'catatan'
+    ];   
 
-    public function kariah(): BelongsTo 
-    {
-        return $this->belongsTo(Kariah::class);
-    }    
+    protected $guarded = [];  
 
     public function ahli_kariah(): BelongsTo 
     {
         return $this->belongsTo(AhliKariah::class);
-    }      
+    }    
+
+    public function caruman(): BelongsTo 
+    {
+        return $this->belongsTo(Caruman::class);
+    }    
 
 }
