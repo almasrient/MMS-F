@@ -14,7 +14,7 @@ class Tanggungan extends Model
 
     protected $guarded = [];
 
-    public function ahlikariah(): BelongsTo 
+    public function ahli_kariah(): BelongsTo 
     {
         return $this->belongsTo(AhliKariah::class);
     }    

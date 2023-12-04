@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -45,15 +46,18 @@ class TanggunganResource extends Resource
                 ->searchable()
                 // ->preload()                     
                 ->required(),       
-            Forms\Components\Select::make('ahli_kariah_nric')
+            Forms\Components\Select::make('ahli_kariah_id')
             ->label('NRIC Penjaga')
-            ->relationship(name: 'ahlikariah', titleAttribute: 'nric')
+            ->relationship(name: 'ahli_kariah', titleAttribute: 'nric')
             ->searchable()
             // ->preload()                     
             ->required(),                               
             Forms\Components\TextInput::make('name_penuh')
                 ->required()
                 ->maxLength(255),
+            Forms\Components\TextInput::make('nric')
+                ->required()
+                ->maxLength(255),    
             Forms\Components\TextInput::make('no_tel')
                 ->label('No Tel')
                 ->maxLength(255),
@@ -78,7 +82,29 @@ class TanggunganResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name_penuh')
+                    ->label('Nama Penuh')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('nric')
+                    ->label('NRIC')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('no_tel')
+                    ->formatStateUsing(function ($state, Tanggungan $tanggungan) {
+                        return new HtmlString("&#9993; ".$tanggungan->no_tel ."<br/> &#9742; ".$tanggungan->email) ;  })
+                    ->label('Contact')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('alamat')
+                    ->label('Alamat')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),  
+                Tables\Columns\TextColumn::make('ahli_kariah.nric')
+                    ->label('NRIC Penjaga')
+                    ->sortable()
+                    ->searchable(),    
             ])
             ->filters([
                 //
