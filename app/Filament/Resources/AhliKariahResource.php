@@ -7,7 +7,10 @@ use App\Filament\Resources\AhliKariahResource\RelationManagers;
 use App\Models\AhliKariah;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
+use Illuminate\Support\Collection;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
@@ -33,18 +36,25 @@ class AhliKariahResource extends Resource
                     ->relationship(name: 'negara', titleAttribute: 'name')
                     ->searchable()
                     // ->preload()
+                    ->live()  
                     ->required(),              
                 Forms\Components\Select::make('negeri_id')
                     ->label('Nama Negeri')
-                    ->relationship(name: 'negeri', titleAttribute: 'name')
+                    ->options(fn(Get $get): Collection => Negeri::query()
+                        ->where('negara_id', $get('negara_id'))
+                        ->pluck('name', 'id'))  
                     ->searchable()
-                    // ->preload()                
+                    // ->preload()             
+                    // ->live()     
                     ->required(),
                 Forms\Components\Select::make('bandar_id')
                     ->label('Nama Bandar')
-                    ->relationship(name: 'bandar', titleAttribute: 'name')
+                    // ->options(fn(Get $get): Collection => Bandar::query()
+                    //     ->where('negeri_id', $get('negeri_id'))
+                    //     ->pluck('name', 'id'))  
                     ->searchable()
-                    // ->preload()                     
+                    // ->preload()     
+                    ->live()                  
                     ->required(),                    
                 Forms\Components\TextInput::make('name_penuh')
                     ->required()
@@ -130,9 +140,9 @@ class AhliKariahResource extends Resource
     {
         return [
             'index' => Pages\ListAhliKariahs::route('/'),
-            'create' => Pages\CreateAhliKariah::route('/create'),
-            'view' => Pages\ViewAhliKariah::route('/{record}'),
-            'edit' => Pages\EditAhliKariah::route('/{record}/edit'),
+            // 'create' => Pages\CreateAhliKariah::route('/create'),
+            // 'view' => Pages\ViewAhliKariah::route('/{record}'),
+            // 'edit' => Pages\EditAhliKariah::route('/{record}/edit'),
         ];
     }    
 }

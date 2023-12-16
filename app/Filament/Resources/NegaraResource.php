@@ -31,6 +31,7 @@ class NegaraResource extends Resource
                     ->maxLength(255)
                     ->required(),
                 Forms\Components\TextInput::make('code')
+                    ->label('Abbrebiation')
                     ->required()
                     ->numeric()
                     ->maxLength(3),
@@ -94,8 +95,8 @@ class NegaraResource extends Resource
     {
         return [
             'index' => Pages\ListNegaras::route('/'),
-            'create' => Pages\CreateNegara::route('/create'),
-            'edit' => Pages\EditNegara::route('/{record}/edit'),
+            // 'create' => Pages\CreateNegara::route('/create'),
+            // 'edit' => Pages\EditNegara::route('/{record}/edit'),
         ];
     }    
 }

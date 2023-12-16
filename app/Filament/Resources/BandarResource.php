@@ -68,7 +68,7 @@ class BandarResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -92,9 +92,9 @@ class BandarResource extends Resource
     {
         return [
             'index' => Pages\ListBandars::route('/'),
-            'create' => Pages\CreateBandar::route('/create'),
-            'view' => Pages\ViewBandar::route('/{record}'),
-            'edit' => Pages\EditBandar::route('/{record}/edit'),
+            // 'create' => Pages\CreateBandar::route('/create'),
+            // 'view' => Pages\ViewBandar::route('/{record}'),
+            // 'edit' => Pages\EditBandar::route('/{record}/edit'),
         ];
     }    
 }

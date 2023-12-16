@@ -42,6 +42,7 @@ class NegeriResource extends Resource
                     ->relationship(name: 'negara', titleAttribute: 'name')
                     ->searchable()
                     ->preload()
+                    // ->live()
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -96,8 +97,8 @@ class NegeriResource extends Resource
     {
         return [
             'index' => Pages\ListNegeris::route('/'),
-            'create' => Pages\CreateNegeri::route('/create'),
-            'edit' => Pages\EditNegeri::route('/{record}/edit'),
+            // 'create' => Pages\CreateNegeri::route('/create'),
+            // 'edit' => Pages\EditNegeri::route('/{record}/edit'),
         ];
     }    
 }
