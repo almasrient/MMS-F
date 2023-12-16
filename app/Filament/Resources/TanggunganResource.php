@@ -4,10 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TanggunganResource\Pages;
 use App\Filament\Resources\TanggunganResource\RelationManagers;
+use App\Models\Negeri;
+use App\Models\Bandar;
 use App\Models\Tanggungan;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
+use Illuminate\Support\Collection;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
@@ -29,22 +34,28 @@ class TanggunganResource extends Resource
         return $form
         ->schema([
             Forms\Components\Select::make('negara_id')
-                ->label('Nama Negara')
-                ->relationship(name: 'negara', titleAttribute: 'name')
-                ->searchable()
-                // ->preload()
-                ->required(),              
+            ->label('Nama Negara')
+            ->relationship(name: 'negara', titleAttribute: 'name')
+            ->searchable()
+            // ->preload()
+            ->live()  
+            ->required(),              
             Forms\Components\Select::make('negeri_id')
                 ->label('Nama Negeri')
-                ->relationship(name: 'negeri', titleAttribute: 'name')
+                ->options(fn(Get $get): Collection => Negeri::query()
+                    ->where('negara_id', $get('negara_id'))
+                    ->pluck('name', 'id'))  
                 ->searchable()
-                // ->preload()                
+                // ->preload()             
+                ->live()     
                 ->required(),
             Forms\Components\Select::make('bandar_id')
                 ->label('Nama Bandar')
-                ->relationship(name: 'bandar', titleAttribute: 'name')
+                ->options(fn(Get $get): Collection => Bandar::query()
+                    ->where('negeri_id', $get('negeri_id'))
+                    ->pluck('name', 'id'))  
                 ->searchable()
-                // ->preload()                     
+                // ->preload()     
                 ->required(),       
             Forms\Components\Select::make('ahli_kariah_id')
             ->label('NRIC Penjaga')
@@ -134,9 +145,9 @@ class TanggunganResource extends Resource
     {
         return [
             'index' => Pages\ListTanggungans::route('/'),
-            'create' => Pages\CreateTanggungan::route('/create'),
-            'view' => Pages\ViewTanggungan::route('/{record}'),
-            'edit' => Pages\EditTanggungan::route('/{record}/edit'),
+            // 'create' => Pages\CreateTanggungan::route('/create'),
+            // 'view' => Pages\ViewTanggungan::route('/{record}'),
+            // 'edit' => Pages\EditTanggungan::route('/{record}/edit'),
         ];
     }    
 }

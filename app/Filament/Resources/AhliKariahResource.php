@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources;
 
+// use App\Filament\Resources\NegeriResource;
 use App\Filament\Resources\AhliKariahResource\Pages;
 use App\Filament\Resources\AhliKariahResource\RelationManagers;
+use App\Models\Negeri;
+use App\Models\Bandar;
 use App\Models\AhliKariah;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -45,16 +48,15 @@ class AhliKariahResource extends Resource
                         ->pluck('name', 'id'))  
                     ->searchable()
                     // ->preload()             
-                    // ->live()     
+                    ->live()     
                     ->required(),
                 Forms\Components\Select::make('bandar_id')
                     ->label('Nama Bandar')
-                    // ->options(fn(Get $get): Collection => Bandar::query()
-                    //     ->where('negeri_id', $get('negeri_id'))
-                    //     ->pluck('name', 'id'))  
+                    ->options(fn(Get $get): Collection => Bandar::query()
+                        ->where('negeri_id', $get('negeri_id'))
+                        ->pluck('name', 'id'))  
                     ->searchable()
                     // ->preload()     
-                    ->live()                  
                     ->required(),                    
                 Forms\Components\TextInput::make('name_penuh')
                     ->required()
