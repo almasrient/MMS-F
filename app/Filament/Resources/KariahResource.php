@@ -4,10 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\KariahResource\Pages;
 use App\Filament\Resources\KariahResource\RelationManagers;
+use App\Models\Negeri;
+use App\Models\Bandar;
 use App\Models\Kariah;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
+use Illuminate\Support\Collection;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
@@ -33,19 +38,25 @@ class KariahResource extends Resource
                 ->relationship(name: 'negara', titleAttribute: 'name')
                 ->searchable()
                 // ->preload()
+                ->live()  
                 ->required(),              
             Forms\Components\Select::make('negeri_id')
                 ->label('Nama Negeri')
-                ->relationship(name: 'negeri', titleAttribute: 'name')
+                ->options(fn(Get $get): Collection => Negeri::query()
+                    ->where('negara_id', $get('negara_id'))
+                    ->pluck('name', 'id'))  
                 ->searchable()
-                // ->preload()                
+                // ->preload()             
+                ->live()     
                 ->required(),
             Forms\Components\Select::make('bandar_id')
                 ->label('Nama Bandar')
-                ->relationship(name: 'bandar', titleAttribute: 'name')
+                ->options(fn(Get $get): Collection => Bandar::query()
+                    ->where('negeri_id', $get('negeri_id'))
+                    ->pluck('name', 'id'))  
                 ->searchable()
-                // ->preload()                     
-                ->required(),                    
+                // ->preload()     
+                ->required(), 
             Forms\Components\TextInput::make('name_kariah')
                 ->required()
                 ->maxLength(255),
@@ -119,8 +130,8 @@ class KariahResource extends Resource
     {
         return [
             'index' => Pages\ListKariahs::route('/'),
-            'create' => Pages\CreateKariah::route('/create'),
-            'edit' => Pages\EditKariah::route('/{record}/edit'),
+            // 'create' => Pages\CreateKariah::route('/create'),
+            // 'edit' => Pages\EditKariah::route('/{record}/edit'),
         ];
     }    
 }

@@ -102,9 +102,9 @@ class OrgaKariahResource extends Resource
     {
         return [
             'index' => Pages\ListOrgaKariahs::route('/'),
-            'create' => Pages\CreateOrgaKariah::route('/create'),
-            'view' => Pages\ViewOrgaKariah::route('/{record}'),
-            'edit' => Pages\EditOrgaKariah::route('/{record}/edit'),
+            // 'create' => Pages\CreateOrgaKariah::route('/create'),
+            // 'view' => Pages\ViewOrgaKariah::route('/{record}'),
+            // 'edit' => Pages\EditOrgaKariah::route('/{record}/edit'),
         ];
     }    
 }
