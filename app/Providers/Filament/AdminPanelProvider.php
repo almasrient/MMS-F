@@ -59,7 +59,15 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
-            ->plugins([FilamentFullCalendarPlugin::make()])
+            ->plugins([FilamentFullCalendarPlugin::make()
+                // ->schedulerLicenseKey()
+                ->selectable()
+                ->editable()
+                // ->timezone()
+                // ->locale()
+                // ->plugins()
+                // ->config()
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
